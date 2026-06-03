@@ -1,0 +1,21 @@
+# GitHub Linguist Overrides — Ensure accurate Tech Stack breakdown
+
+# Mark data & output directories as non-source (don't count in language stats)
+data/** linguist-vendored
+output/** linguist-vendored
+docs/** linguist-documentation
+
+# Explicitly classify frontend as JavaScript/JSX
+frontend/src/**/*.jsx linguist-language=JavaScript
+frontend/src/**/*.js linguist-language=JavaScript
+frontend/src/**/*.css linguist-language=CSS
+
+# Explicitly classify backend as Python
+backend/**/*.py linguist-language=Python
+
+# Mark generated migration files as generated (exclude from language stats)
+backend/apps/*/migrations/*.py linguist-generated
+
+# Mark lock files and configs as vendored
+frontend/package-lock.json linguist-vendored
+frontend/.oxlintrc.json linguist-vendored
