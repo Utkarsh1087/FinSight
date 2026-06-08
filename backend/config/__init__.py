@@ -1,0 +1,1 @@
+# FinSight Config Init
