@@ -1,0 +1,25 @@
+services:
+  # FinSight Django REST API
+  - type: web
+    name: finsight-api
+    env: python
+    buildCommand: "pip install -r backend/requirements.txt && python backend/manage.py migrate && python backend/manage.py collectstatic --no-input"
+    startCommand: "gunicorn --chdir backend config.wsgi:application --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: finsight-db
+          property: connectionString
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com,localhost,127.0.0.1"
+
+databases:
+  # Managed PostgreSQL Database
+  - name: finsight-db
+    databaseName: finsight
+    user: finsight_user
+    plan: free
